@@ -25,8 +25,8 @@ namespace DrawPNL
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
-            double k1 = 0.2;
-            double k2 = 0.44;
+            double k1 = 0.12;
+            double k2 = 0.32;
             DataRepo.DataRepo data = new DataRepo.DataRepo();
             data.Load(2016, "AUD");
 

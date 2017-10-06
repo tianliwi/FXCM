@@ -68,6 +68,20 @@ namespace BackTest
                     longOrder.size = units;
                     pendOrders.Add(longOrder);
                 }
+                // update pnl curve
+                if (pnlTrack)
+                {
+                    double curPNL = 0;
+                    foreach (var o in closedOrders)
+                    {
+                        curPNL += o.pnl - commission * 2.0;
+                    }
+                    foreach (var o in openOrders)
+                    {
+                        curPNL += o.pnl;
+                    }
+                    pnlList[cur] = curPNL;
+                }
 
                 // scan within the current 4 hours
                 while (cur < curEnd)
@@ -79,20 +93,6 @@ namespace BackTest
                     {
                         cur = cur.AddMinutes(1);
                         continue;
-                    }
-                    // update pnl curve
-                    if (pnlTrack)
-                    {
-                        double curPNL = 0;
-                        foreach (var o in closedOrders)
-                        {
-                            curPNL += o.pnl - commission * 2.0;
-                        }
-                        foreach (var o in openOrders)
-                        {
-                            curPNL += data.M1[cur].BidClose - o.openPrice;
-                        }
-                        pnlList[cur] = curPNL;
                     }
                     double askHigh = data.M1[cur].AskHigh;
                     double askLow = data.M1[cur].AskLow;
@@ -116,6 +116,7 @@ namespace BackTest
                     // check open orders
                     foreach (var curOrder in openOrders.ToArray())
                     {
+                        curOrder.pnl = (data.M1[cur].BidClose - curOrder.openPrice) *curOrder.size;
                         // stop loss if bid is too low
                         if (bidLow <= curOrder.stopLoss && bidHigh >= curOrder.stopLoss)
                         {
