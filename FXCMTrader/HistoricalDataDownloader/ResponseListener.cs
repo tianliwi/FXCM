@@ -9,7 +9,7 @@ namespace HistoricalDataDownloader
     internal class ResponseListener : IO2GResponseListener
     {
         private O2GSession mSession = null;
-        public Dictionary<string, Candle> candles;
+        public Dictionary<string, string> candles;
 
         public WaitHandle ResponseHandle
         {
@@ -20,17 +20,14 @@ namespace HistoricalDataDownloader
         {
             mSession = session;
             mResponseHandle = new AutoResetEvent(false);
-            candles = new Dictionary<string, Candle>();
+            candles = new Dictionary<string, string>();
         }
 
         public void onRequestCompleted(string requestId, O2GResponse response)
         {
-            Console.WriteLine(requestId);
-            Console.WriteLine(response.Type);
             if (response.Type == O2GResponseType.MarketDataSnapshot)
             {
                 GetPrices(mSession, response);
-                Console.WriteLine("\nDone!");
             }
             mResponseHandle.Set();
         }
@@ -55,7 +52,7 @@ namespace HistoricalDataDownloader
 
         private void GetPrices(O2GSession session, O2GResponse response)
         {
-            Console.WriteLine();
+            TimeZoneInfo est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
             O2GResponseReaderFactory factory = session.getResponseReaderFactory();
             if (factory != null)
             {
@@ -65,7 +62,8 @@ namespace HistoricalDataDownloader
                     if (reader.isBar)
                     {
                         Candle candle = new Candle();
-                        candle.openTime = reader.getDate(ii).ToString("yyyyMMdd HH:mm:ss");
+                        candle.openTime = TimeZoneInfo.ConvertTimeFromUtc(reader.getDate(ii), est).ToString("yyyyMMdd HH:mm:ss");
+                        //candle.openTime = reader.getDate(ii).ToString("yyyyMMdd HH:mm:ss");
                         candle.BidOpen = reader.getBidOpen(ii);
                         candle.BidHigh = reader.getBidHigh(ii);
                         candle.BidLow = reader.getBidLow(ii);
@@ -75,7 +73,7 @@ namespace HistoricalDataDownloader
                         candle.AskLow = reader.getAskLow(ii);
                         candle.AskClose = reader.getAskClose(ii);
                         candle.Volume = reader.getVolume(ii);
-                        candles[candle.openTime] = candle;
+                        candles[candle.openTime] = candle.ToString();
                     }
                     else
                     {

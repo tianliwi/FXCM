@@ -39,6 +39,8 @@ namespace DataRepo
         }
         public SortedList<DateTime, Candle> LoadCSV(string filename)
         {
+            int offset = 1;
+            if (filename.Substring(filename.Length - 6) == "M1.csv") offset = 0;
             SortedList<DateTime, Candle> list = new SortedList<DateTime, Candle>();
             string[] lines = File.ReadAllLines(filename);
             foreach (var line in lines)
@@ -46,15 +48,15 @@ namespace DataRepo
                 string[] col = line.Split(',');
                 Candle candle = new Candle();
                 candle.openTime = col[0];
-                candle.BidOpen = Convert.ToDouble(col[1]);
-                candle.BidHigh = Convert.ToDouble(col[2]);
-                candle.BidLow = Convert.ToDouble(col[3]);
-                candle.BidClose = Convert.ToDouble(col[4]);
-                candle.AskOpen = Convert.ToDouble(col[5]);
-                candle.AskHigh = Convert.ToDouble(col[6]);
-                candle.AskLow = Convert.ToDouble(col[7]);
-                candle.AskClose = Convert.ToDouble(col[8]);
-                candle.Volume = Convert.ToInt32(col[9]);
+                candle.BidOpen = Convert.ToDouble(col[1 + offset]);
+                candle.BidHigh = Convert.ToDouble(col[2 + offset]);
+                candle.BidLow = Convert.ToDouble(col[3 + offset]);
+                candle.BidClose = Convert.ToDouble(col[4 + offset]);
+                candle.AskOpen = Convert.ToDouble(col[5 + offset]);
+                candle.AskHigh = Convert.ToDouble(col[6 + offset]);
+                candle.AskLow = Convert.ToDouble(col[7 + offset]);
+                candle.AskClose = Convert.ToDouble(col[8 + offset]);
+                candle.Volume = Convert.ToInt32(col[9 + offset]);
                 list[DateTime.ParseExact(col[0],"yyyyMMdd HH:mm:ss", CultureInfo.CurrentCulture)] = candle;
             }
             return list;

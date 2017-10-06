@@ -5,6 +5,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using fxcore2;
 using System.Globalization;
+using System.IO;
 
 namespace HistoricalDataDownloader
 {
@@ -95,10 +96,8 @@ namespace HistoricalDataDownloader
                         GetHistoryPrices(session, responseListener, sInstrument, sTimeframeName, curStart, curEnd);
                         curStart = curEnd;
                     }
-                    foreach(var e in responseListener.candles)
-                    {
-                        Console.WriteLine(e.Value);
-                    }
+                    File.WriteAllLines(@"E:\GitHub\FXCM\Data\" + sInstrument.Substring(0,3) + @"\" + sStartTime.Substring(0, 4) + "_" + sTimeframeName + ".csv",
+                        responseListener.candles.Values);
                     session.unsubscribeResponse(responseListener);
                     session.logout();
                     while (!sessionStatusListener.Disconnected)
@@ -120,6 +119,7 @@ namespace HistoricalDataDownloader
         }
         public static void GetHistoryPrices(O2GSession session, ResponseListener listener, string instrument, string timeframeName, DateTime dFrom, DateTime dTo)
         {
+            Console.WriteLine("{0} - {1}", dFrom, dTo);
             O2GRequestFactory factory = session.getRequestFactory();
             if (factory != null)
             {
