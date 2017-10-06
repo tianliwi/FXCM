@@ -1,0 +1,8 @@
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\bin\Debug\FXCMTrader.exe.config
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\bin\Debug\FXCMTrader.exe
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\bin\Debug\FXCMTrader.pdb
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\bin\Debug\fxcore2.dll
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\obj\Debug\FXCMTrader.csprojResolveAssemblyReference.cache
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\obj\Debug\FXCMTrader.csproj.CoreCompileInputs.cache
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\obj\Debug\FXCMTrader.exe
+E:\GitHub\FXCM\FXCMTrader\FXCMTrader\obj\Debug\FXCMTrader.pdb

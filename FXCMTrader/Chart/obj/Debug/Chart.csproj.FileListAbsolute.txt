@@ -1,0 +1,12 @@
+E:\GitHub\FXCM\FXCMTrader\Chart\bin\Debug\Chart.exe.config
+E:\GitHub\FXCM\FXCMTrader\Chart\bin\Debug\Chart.exe
+E:\GitHub\FXCM\FXCMTrader\Chart\bin\Debug\Chart.pdb
+E:\GitHub\FXCM\FXCMTrader\Chart\bin\Debug\DataRepo.dll
+E:\GitHub\FXCM\FXCMTrader\Chart\bin\Debug\DataRepo.pdb
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.csprojResolveAssemblyReference.cache
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.Chart.resources
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.Properties.Resources.resources
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.csproj.GenerateResource.Cache
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.csproj.CoreCompileInputs.cache
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.exe
+E:\GitHub\FXCM\FXCMTrader\Chart\obj\Debug\Chart.pdb

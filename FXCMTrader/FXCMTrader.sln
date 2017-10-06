@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FXCMTrader", "FXCMTrader\FXCMTrader.csproj", "{5AF53926-AAF6-4DBC-9D52-D312BC4325B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricalDataDownloader", "HistoricalDataDownloader\HistoricalDataDownloader.csproj", "{71A485DE-914D-436B-92BB-7936F11CD312}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AF53926-AAF6-4DBC-9D52-D312BC4325B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF53926-AAF6-4DBC-9D52-D312BC4325B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF53926-AAF6-4DBC-9D52-D312BC4325B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF53926-AAF6-4DBC-9D52-D312BC4325B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A485DE-914D-436B-92BB-7936F11CD312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A485DE-914D-436B-92BB-7936F11CD312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A485DE-914D-436B-92BB-7936F11CD312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A485DE-914D-436B-92BB-7936F11CD312}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4987265-BF02-4D20-B041-BDFEFB43A9B9}
+	EndGlobalSection
+EndGlobal
