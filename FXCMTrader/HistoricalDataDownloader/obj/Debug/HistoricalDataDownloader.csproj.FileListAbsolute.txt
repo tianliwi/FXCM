@@ -14,3 +14,5 @@ C:\Users\liti\Documents\FXCM\FXCMTrader\HistoricalDataDownloader\obj\Debug\Histo
 C:\Users\liti\Documents\FXCM\FXCMTrader\HistoricalDataDownloader\obj\Debug\HistoricalDataDownloader.csproj.CoreCompileInputs.cache
 C:\Users\liti\Documents\FXCM\FXCMTrader\HistoricalDataDownloader\obj\Debug\HistoricalDataDownloader.exe
 C:\Users\liti\Documents\FXCM\FXCMTrader\HistoricalDataDownloader\obj\Debug\HistoricalDataDownloader.pdb
+E:\GitHub\FXCM\FXCMTrader\HistoricalDataDownloader\bin\Debug\DataRepo.dll
+E:\GitHub\FXCM\FXCMTrader\HistoricalDataDownloader\bin\Debug\DataRepo.pdb

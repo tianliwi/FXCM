@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Runtime.InteropServices;
 using fxcore2;
+using System.Globalization;
 
 namespace HistoricalDataDownloader
 {
@@ -46,35 +47,19 @@ namespace HistoricalDataDownloader
         {
             try
             {
-                /*
-                if (args.Length < 8)
-                {
-                    Console.WriteLine("Not Enough Parameters!");
-                    Console.WriteLine("USAGE: [application].exe [instrument (default \"EUR/USD\"] [time frame (default \"m1\")] [datetime \"from\" or empty string for \"from now\" (default)] [datetime \"to\" or empty string for \"to now\" (default)] [user ID] [password] [URL] [connection] [session ID (if needed) or empty string] [pin (if needed) or empty string] ");
-                    Console.WriteLine("\nPress enter to close the program");
-                    Console.ReadLine();
-                    return;
-                }
-                */
-
-                sInstrument = "EUR/USD"; // default
-                //sInstrument = args[0];
-                sTimeframeName = "m1";   // default
-                //sTimeframeName = args[1];
-
-                string sDateTimeFrom = "";
-                sDateTimeFrom = DateTime.Now.AddHours(-4).ToString();
-
-                string sDateTimeTo = "";
-                sDateTimeTo = DateTime.Now.AddHours(-3).ToString();
-
+                sInstrument = "AUD/USD"; // default
+                Console.WriteLine(args.Length);
+                sTimeframeName = args[0];   // default
+                string sStartTime = args[1];
+                string sEndTime = args[2];
+                
                 string sUserID = "D25611513";
                 string sPassword = "2609";
                 string sURL = "http://www.fxcorporate.com/Hosts.jsp";
                 string sConnection = "Demo";
 
 
-                Console.WriteLine("Getting price history for instrument {0}; timeframe {1}; from {2}; to {3}", sInstrument, sTimeframeName, sDateTimeFrom, sDateTimeTo);
+                Console.WriteLine("Getting price history for instrument {0}; timeframe {1}; from {2}; to {3}", sInstrument, sTimeframeName, sStartTime, sEndTime);
 
 
                 session = O2GTransport.createSession();
@@ -82,13 +67,38 @@ namespace HistoricalDataDownloader
                 session.subscribeSessionStatus(sessionStatusListener);
                 sessionStatusListener.login(sUserID, sPassword, sURL, sConnection); //wait until login or fail
 
+                DateTime startTime = DateTime.ParseExact(sStartTime, "yyyyMMddHH:mm:ss", CultureInfo.CurrentCulture).ToUniversalTime();
+                DateTime endTime = DateTime.ParseExact(sEndTime, "yyyyMMddHH:mm:ss", CultureInfo.CurrentCulture).ToUniversalTime();
+
                 if (sessionStatusListener.Connected)
                 {
                     responseListener = new ResponseListener(session);
                     session.subscribeResponse(responseListener);
+                    responseListener.ResponseHandle.WaitOne(30000);
 
-                    GetHistoryPrices(session, responseListener, sInstrument, sTimeframeName, sDateTimeFrom, sDateTimeTo);
-
+                    DateTime curStart = startTime;
+                    while (curStart < endTime)
+                    {
+                        DateTime curEnd = curStart;
+                        switch (sTimeframeName)
+                        {
+                            case "M1":
+                                curEnd = curStart.AddHours(4);
+                                break;
+                            case "H4":
+                                curEnd = curStart.AddDays(50);
+                                break;
+                            case "D1":
+                                curEnd = curStart.AddYears(1);
+                                break;
+                        }
+                        GetHistoryPrices(session, responseListener, sInstrument, sTimeframeName, curStart, curEnd);
+                        curStart = curEnd;
+                    }
+                    foreach(var e in responseListener.candles)
+                    {
+                        Console.WriteLine(e.Value);
+                    }
                     session.unsubscribeResponse(responseListener);
                     session.logout();
                     while (!sessionStatusListener.Disconnected)
@@ -96,10 +106,9 @@ namespace HistoricalDataDownloader
                 }
 
                 session.unsubscribeSessionStatus(sessionStatusListener);
+                session.Dispose();
                 Console.WriteLine("Press enter to exit");
                 Console.ReadLine();
-
-                session.Dispose();
 
             }
             catch (Exception e)
@@ -109,7 +118,7 @@ namespace HistoricalDataDownloader
                 Console.ReadLine();
             }
         }
-        public static void GetHistoryPrices(O2GSession session, ResponseListener listener, string instrument, string timeframeName, string sFrom, string sTo)
+        public static void GetHistoryPrices(O2GSession session, ResponseListener listener, string instrument, string timeframeName, DateTime dFrom, DateTime dTo)
         {
             O2GRequestFactory factory = session.getRequestFactory();
             if (factory != null)
@@ -118,39 +127,12 @@ namespace HistoricalDataDownloader
                 O2GRequest request = factory.createMarketDataSnapshotRequestInstrument(sInstrument, tf, MAX_BARS);
                 if (request == null)
                 {
-                    Console.WriteLine("wow");
+                    throw new Exception("Cannot initialize request.");
                 }
-                DateTime dtFrom;
-                DateTime dtTo;
-                dtFrom = string.IsNullOrEmpty(sFrom) ? factory.ZERODATE : DateTime.Parse(sFrom);
-                dtTo = string.IsNullOrEmpty(sTo) ? factory.ZERODATE : DateTime.Parse(sTo);
-                factory.fillMarketDataSnapshotRequestTime(request, dtFrom, dtTo, false);
+                factory.fillMarketDataSnapshotRequestTime(request, dFrom, dTo, false);
 
                 session.sendRequest(request);
                 responseListener.ResponseHandle.WaitOne(30000); //30 seconds timeout
-            }
-        }
-
-        public static void PrintPrices(O2GSession session, O2GResponse response)
-        {
-            Console.WriteLine();
-            O2GResponseReaderFactory factory = session.getResponseReaderFactory();
-            if (factory != null)
-            {
-                O2GMarketDataSnapshotResponseReader reader = factory.createMarketDataSnapshotReader(response);
-                for (int ii = 0; ii < reader.Count; ii++)
-                {
-                    if (reader.isBar)
-                    {
-                        Console.WriteLine("DateTime={0}, BidOpen={1}, BidHigh={2}, BidLow={3}, BidClose={4}, AskOpen={5}, AskHigh={6}, AskLow={7}, AskClose= {8}, Volume = {9}",
-                                            reader.getDate(ii), reader.getBidOpen(ii), reader.getBidHigh(ii), reader.getBidLow(ii), reader.getBidClose(ii),
-                                            reader.getAskOpen(ii), reader.getAskHigh(ii), reader.getAskLow(ii), reader.getAskClose(ii), reader.getVolume(ii));
-                    }
-                    else
-                    {
-                        Console.WriteLine("DateTime={0}, Bid={1}, Ask={2}", reader.getDate(ii), reader.getBidClose(ii), reader.getAskClose(ii));
-                    }
-                }
             }
         }
     }

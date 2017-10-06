@@ -1,12 +1,15 @@
 ﻿using System;
 using fxcore2;
 using System.Threading;
+using System.Collections.Generic;
+using DataRepo;
 
 namespace HistoricalDataDownloader
 {
     internal class ResponseListener : IO2GResponseListener
     {
         private O2GSession mSession = null;
+        public Dictionary<string, Candle> candles;
 
         public WaitHandle ResponseHandle
         {
@@ -17,6 +20,7 @@ namespace HistoricalDataDownloader
         {
             mSession = session;
             mResponseHandle = new AutoResetEvent(false);
+            candles = new Dictionary<string, Candle>();
         }
 
         public void onRequestCompleted(string requestId, O2GResponse response)
@@ -25,7 +29,7 @@ namespace HistoricalDataDownloader
             Console.WriteLine(response.Type);
             if (response.Type == O2GResponseType.MarketDataSnapshot)
             {
-                Program.PrintPrices(mSession, response);
+                GetPrices(mSession, response);
                 Console.WriteLine("\nDone!");
             }
             mResponseHandle.Set();
@@ -47,6 +51,38 @@ namespace HistoricalDataDownloader
         public void onTablesUpdates(O2GResponse data)
         {
             //STUB
+        }
+
+        private void GetPrices(O2GSession session, O2GResponse response)
+        {
+            Console.WriteLine();
+            O2GResponseReaderFactory factory = session.getResponseReaderFactory();
+            if (factory != null)
+            {
+                O2GMarketDataSnapshotResponseReader reader = factory.createMarketDataSnapshotReader(response);
+                for (int ii = 0; ii < reader.Count; ii++)
+                {
+                    if (reader.isBar)
+                    {
+                        Candle candle = new Candle();
+                        candle.openTime = reader.getDate(ii).ToString("yyyyMMdd HH:mm:ss");
+                        candle.BidOpen = reader.getBidOpen(ii);
+                        candle.BidHigh = reader.getBidHigh(ii);
+                        candle.BidLow = reader.getBidLow(ii);
+                        candle.BidClose = reader.getBidClose(ii);
+                        candle.AskOpen = reader.getAskOpen(ii);
+                        candle.AskHigh = reader.getAskHigh(ii);
+                        candle.AskLow = reader.getAskLow(ii);
+                        candle.AskClose = reader.getAskClose(ii);
+                        candle.Volume = reader.getVolume(ii);
+                        candles[candle.openTime] = candle;
+                    }
+                    else
+                    {
+                        Console.WriteLine("DateTime={0}, Bid={1}, Ask={2}", reader.getDate(ii), reader.getBidClose(ii), reader.getAskClose(ii));
+                    }
+                }
+            }
         }
     }
 }
