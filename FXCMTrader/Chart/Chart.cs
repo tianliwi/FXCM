@@ -34,7 +34,7 @@ namespace Chart
             double yMin = 2;
             double yMax = 0;
             int lineNum = 0;
-            foreach (var line in dataRepo.H4)
+            foreach (var line in dataRepo.D1)
             {
                 DataRow row = dt.NewRow();
                 row["ID"] = lineNum++;
