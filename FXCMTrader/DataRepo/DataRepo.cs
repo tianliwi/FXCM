@@ -10,10 +10,19 @@ namespace DataRepo
 {
     public class DataRepo
     {
-        public static string DataDir = @"E:\GitHub\FXCM\Data\";
+        public static string DataDir = "";
         public SortedList<DateTime, Candle> M1;
         public SortedList<DateTime, Candle> H4;
         public SortedList<DateTime, Candle> D1;
+        
+        public DataRepo()
+        {
+            if(string.IsNullOrEmpty(DataDir))
+            {
+                string[] paras = File.ReadAllLines(@"C:\FXCMHD.txt");
+                DataDir = paras[6] + @"Data\";
+            }
+        }
         public void Load(int year, string symbol)
         {
             LoadM1(year, symbol);

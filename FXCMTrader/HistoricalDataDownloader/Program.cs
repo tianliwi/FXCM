@@ -48,14 +48,17 @@ namespace HistoricalDataDownloader
         {
             try
             {
-                sInstrument = "AUD/USD"; // default
-                Console.WriteLine(args.Length);
-                sTimeframeName = args[0];   // default
-                string sStartTime = args[1];
-                string sEndTime = args[2];
+
+                string[] paras = File.ReadAllLines(@"C:\FXCMHD.txt");
+
+                string sUserID = paras[0];
+                string sPassword = paras[1];
+                sInstrument = paras[2];
+                sTimeframeName = paras[3];
+                string sStartTime = paras[4];
+                string sEndTime = paras[5];
+                DataRepo.DataRepo.DataDir = paras[6] + @"Data\";
                 
-                string sUserID = "D25611513";
-                string sPassword = "2609";
                 string sURL = "http://www.fxcorporate.com/Hosts.jsp";
                 string sConnection = "Demo";
 
@@ -96,7 +99,7 @@ namespace HistoricalDataDownloader
                         GetHistoryPrices(session, responseListener, sInstrument, sTimeframeName, curStart, curEnd);
                         curStart = curEnd;
                     }
-                    File.WriteAllLines(@"E:\GitHub\FXCM\Data\" + sInstrument.Substring(0,3) + @"\" + sStartTime.Substring(0, 4) + "_" + sTimeframeName + ".csv",
+                    File.WriteAllLines(DataRepo.DataRepo.DataDir + sInstrument.Substring(0,3) + @"\" + sStartTime.Substring(0, 4) + "_" + sTimeframeName + ".csv",
                         responseListener.candles.Values);
                     session.unsubscribeResponse(responseListener);
                     session.logout();

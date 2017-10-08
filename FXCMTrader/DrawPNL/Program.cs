@@ -16,7 +16,9 @@ namespace DrawPNL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form f1 = new FXCMBT();
+            f1.Text = "FXCM Back Test";
+            Application.Run(f1);
         }
     }
 }

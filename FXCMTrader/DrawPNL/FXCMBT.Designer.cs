@@ -1,6 +1,6 @@
 ﻿namespace DrawPNL
 {
-    partial class Form1
+    partial class FXCMBT
     {
         /// <summary>
         /// Required designer variable.
@@ -44,22 +44,24 @@
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
+            this.chart1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "pnl";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1632, 999);
+            this.chart1.Size = new System.Drawing.Size(816, 519);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1632, 999);
+            this.ClientSize = new System.Drawing.Size(816, 519);
             this.Controls.Add(this.chart1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

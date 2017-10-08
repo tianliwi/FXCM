@@ -63,7 +63,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "E:\GitHub\FXCM\bin\*.*" "$(TargetDir)"
+    <PostBuildEvent>copy "$(TargetDir)..\..\..\..\bin\*.*" "$(TargetDir)"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

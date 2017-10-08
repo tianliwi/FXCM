@@ -35,7 +35,6 @@ E:\GitHub\FXCM\FXCMTrader\DrawPNL\bin\Debug\BackTest.pdb
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\bin\Debug\BackTest.exe.config
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\bin\Debug\DataRepo.pdb
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.csprojResolveAssemblyReference.cache
-E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.Form1.resources
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.Properties.Resources.resources
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.csproj.GenerateResource.Cache
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.csproj.CoreCompileInputs.cache
@@ -43,3 +42,4 @@ E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.exe
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.pdb
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\bin\Debug\MathNet.Numerics.dll
 E:\GitHub\FXCM\FXCMTrader\DrawPNL\bin\Debug\MathNet.Numerics.xml
+E:\GitHub\FXCM\FXCMTrader\DrawPNL\obj\Debug\DrawPNL.FXCMBT.resources
