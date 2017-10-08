@@ -21,7 +21,7 @@ namespace BackTest
 
         public ShortStrategy(DataRepo.DataRepo data)
         {
-            this.data = data;// new DataRepo("AUD", new string[] { "2015", "2016", "2017" });
+            this.data = data;
             pendOrders = new List<BTOrder>();
             openOrders = new List<BTOrder>();
             closedOrders = new List<BTOrder>();

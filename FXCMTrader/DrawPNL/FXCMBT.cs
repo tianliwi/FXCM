@@ -14,15 +14,15 @@ namespace DrawPNL
         {
             InitializeComponent();
             
-            Load += new EventHandler(Form1_Load);
+            Load += new EventHandler(LoadBackTest);
         }
 
-        private void Form1_Load(object sender, System.EventArgs e)
+        private void LoadBackTest(object sender, System.EventArgs e)
         {
             double k1 = 0.12;
             double k2 = 0.32;
             DataRepo.DataRepo data = new DataRepo.DataRepo();
-            data.Load(2016, "AUD");
+            data.Load(2016, DataRepo.DataRepo.Symbol);
             LongStrategy longStra = new LongStrategy(data);
             Tuple<int, int, double> res = longStra.Start(k1, k2, true);
             chart1.Titles.Add("Win: " + res.Item1.ToString() + ", " + 

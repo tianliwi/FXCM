@@ -11,15 +11,17 @@ namespace DataRepo
     public class DataRepo
     {
         public static string DataDir = "";
+        public static string Symbol = "";
         public SortedList<DateTime, Candle> M1;
         public SortedList<DateTime, Candle> H4;
         public SortedList<DateTime, Candle> D1;
         
         public DataRepo()
         {
-            if(string.IsNullOrEmpty(DataDir))
+            if(string.IsNullOrEmpty(DataDir) || string.IsNullOrEmpty(Symbol))
             {
                 string[] paras = File.ReadAllLines(@"C:\FXCMHD.txt");
+                Symbol = paras[2].Substring(0, 3);
                 DataDir = paras[6] + @"Data\";
             }
         }

@@ -22,7 +22,7 @@ namespace Chart
         private void GetData(object sender, System.EventArgs e)
         {
             DataRepo.DataRepo dataRepo = new DataRepo.DataRepo();
-            dataRepo.Load(2016, "AUD");
+            dataRepo.Load(2016, DataRepo.DataRepo.Symbol);
             
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
