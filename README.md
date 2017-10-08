@@ -15,7 +15,7 @@
     
     Line 7 = Root directory of project
     
-2. Run HistoricalDataDownloader to download historical data for given pairs, e.g. download 2016 minute data use the following FXCMHD.txt
+2. Run HistoricalDataDownloader to download historical data for given pairs, e.g. download 2016 minute data use the following FXCMHD.txt (Notice: change 14:00:00 to the local equivalent time of 17:00:00 EST)
     
     ![alt text](https://github.com/tianliwi/FXCM/blob/master/params.png)
 
