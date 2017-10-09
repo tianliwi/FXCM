@@ -22,7 +22,7 @@ namespace DrawPNL
             double k1 = 0.12;
             double k2 = 0.32;
             DataRepo.DataRepo data = new DataRepo.DataRepo();
-            data.Load(2016, DataRepo.DataRepo.Symbol);
+            data.Load(new int[] { 2015, 2016, 2017 }, DataRepo.DataRepo.Symbol);
             LongStrategy longStra = new LongStrategy(data);
             Tuple<int, int, double> res = longStra.Start(k1, k2, true);
             chart1.Titles.Add("Win: " + res.Item1.ToString() + ", " + 

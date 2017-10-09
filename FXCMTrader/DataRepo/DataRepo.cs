@@ -24,50 +24,52 @@ namespace DataRepo
                 Symbol = paras[2].Substring(0, 3);
                 DataDir = paras[6] + @"Data\";
             }
+            M1 = new SortedList<DateTime, Candle>();
+            H4 = new SortedList<DateTime, Candle>();
+            D1 = new SortedList<DateTime, Candle>();
         }
-        public void Load(int year, string symbol)
+        public void Load(int[] years, string symbol)
         {
-            LoadM1(year, symbol);
-            LoadH4(year, symbol);
-            LoadD1(year, symbol);
+            foreach (int year in years)
+            {
+                LoadData(year, symbol, "M1");
+                LoadData(year, symbol, "H4");
+                LoadData(year, symbol, "D1");
+            }
         }
-        public void LoadM1(int year, string symbol)
-        {
-            M1 = LoadData(year, symbol, "M1");
-        }
-        public void LoadH4(int year, string symbol)
-        {
-            H4 = LoadData(year, symbol, "H4");
-        }
-        public void LoadD1(int year, string symbol)
-        {
-            D1 = LoadData(year, symbol, "D1");
-        }
-        public SortedList<DateTime, Candle> LoadData(int year, string symbol, string granularity)
+        public void LoadData(int year, string symbol, string granularity)
         {
             string filename = DataDir + symbol + @"\" + year.ToString() + "_" + granularity + ".csv";
-            return LoadCSV(filename);
+            switch (granularity)
+            {
+                case "M1":
+                    LoadCSV(filename, ref M1);
+                    break;
+                case "H4":
+                    LoadCSV(filename, ref H4);
+                    break;
+                case "D1":
+                    LoadCSV(filename, ref D1);
+                    break;
+            }
         }
-        public SortedList<DateTime, Candle> LoadCSV(string filename)
+        public SortedList<DateTime, Candle> LoadCSV(string filename, ref SortedList<DateTime, Candle> list)
         {
-            int offset = 1;
-            if (filename.Substring(filename.Length - 6) == "M1.csv") offset = 0;
-            SortedList<DateTime, Candle> list = new SortedList<DateTime, Candle>();
             string[] lines = File.ReadAllLines(filename);
             foreach (var line in lines)
             {
                 string[] col = line.Split(',');
                 Candle candle = new Candle();
                 candle.openTime = col[0];
-                candle.BidOpen = Convert.ToDouble(col[1 + offset]);
-                candle.BidHigh = Convert.ToDouble(col[2 + offset]);
-                candle.BidLow = Convert.ToDouble(col[3 + offset]);
-                candle.BidClose = Convert.ToDouble(col[4 + offset]);
-                candle.AskOpen = Convert.ToDouble(col[5 + offset]);
-                candle.AskHigh = Convert.ToDouble(col[6 + offset]);
-                candle.AskLow = Convert.ToDouble(col[7 + offset]);
-                candle.AskClose = Convert.ToDouble(col[8 + offset]);
-                candle.Volume = Convert.ToInt32(col[9 + offset]);
+                candle.BidOpen = Convert.ToDouble(col[2]);
+                candle.BidHigh = Convert.ToDouble(col[3]);
+                candle.BidLow = Convert.ToDouble(col[4]);
+                candle.BidClose = Convert.ToDouble(col[5]);
+                candle.AskOpen = Convert.ToDouble(col[6]);
+                candle.AskHigh = Convert.ToDouble(col[7]);
+                candle.AskLow = Convert.ToDouble(col[8]);
+                candle.AskClose = Convert.ToDouble(col[9]);
+                candle.Volume = Convert.ToInt32(col[10]);
                 list[DateTime.ParseExact(col[0],"yyyyMMdd HH:mm:ss", CultureInfo.CurrentCulture)] = candle;
             }
             return list;

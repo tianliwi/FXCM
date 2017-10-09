@@ -12,10 +12,6 @@ E:\GitHub\TWS\IBTrader\BackTest\bin\Debug\IBTrader.exe.config
 E:\GitHub\TWS\IBTrader\BackTest\obj\Debug\BackTest.csproj.CoreCompileInputs.cache
 E:\GitHub\TWS\IBTrader\BackTest\bin\Debug\MathNet.Numerics.dll
 E:\GitHub\TWS\IBTrader\BackTest\bin\Debug\MathNet.Numerics.xml
-E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.csprojResolveAssemblyReference.cache
-E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.csproj.CoreCompileInputs.cache
-E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.exe
-E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.pdb
 E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\BackTest.exe.config
 E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\BackTest.exe
 E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\BackTest.pdb
@@ -23,3 +19,7 @@ E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\DataRepo.dll
 E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\MathNet.Numerics.dll
 E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\DataRepo.pdb
 E:\GitHub\FXCM\FXCMTrader\BackTest\bin\Debug\MathNet.Numerics.xml
+E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.csprojResolveAssemblyReference.cache
+E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.csproj.CoreCompileInputs.cache
+E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.exe
+E:\GitHub\FXCM\FXCMTrader\BackTest\obj\Debug\BackTest.pdb

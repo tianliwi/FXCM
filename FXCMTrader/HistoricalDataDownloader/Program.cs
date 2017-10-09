@@ -84,7 +84,7 @@ namespace HistoricalDataDownloader
                     while (curStart < endTime)
                     {
                         DateTime curEnd = curStart;
-                        switch (sTimeframeName)
+                        switch (sTimeframeName.ToUpper())
                         {
                             case "M1":
                                 curEnd = curStart.AddHours(4);
@@ -99,7 +99,7 @@ namespace HistoricalDataDownloader
                         GetHistoryPrices(session, responseListener, sInstrument, sTimeframeName, curStart, curEnd);
                         curStart = curEnd;
                     }
-                    File.WriteAllLines(DataRepo.DataRepo.DataDir + sInstrument.Substring(0,3) + @"\" + sStartTime.Substring(0, 4) + "_" + sTimeframeName + ".csv",
+                    File.WriteAllLines(DataRepo.DataRepo.DataDir + sInstrument.Substring(0,3) + @"\" + sStartTime.Substring(0, 4) + "_" + sTimeframeName.ToUpper() + ".csv",
                         responseListener.candles.Values);
                     session.unsubscribeResponse(responseListener);
                     session.logout();
