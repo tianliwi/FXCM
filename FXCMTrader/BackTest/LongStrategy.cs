@@ -36,10 +36,13 @@ namespace BackTest
             openOrders.Clear();
             closedOrders.Clear();
 
+            DateTime BTStart = new DateTime(2015, 6, 1);
+            DateTime BTEnd = new DateTime(2016, 9, 1);
             foreach (var h4Bin in data.H4)
             {
                 pendOrders.Clear();
                 DateTime cur = h4Bin.Key;
+                //if (DateTime.Compare(cur, BTStart) < 0 || DateTime.Compare(cur, BTEnd) > 0) continue;
                 DateTime curEnd = cur.AddHours(4);
                 double R = 0;
                 double R2 = 0;
@@ -73,10 +76,6 @@ namespace BackTest
                     foreach (var o in closedOrders)
                     {
                         curPNL += o.pnl - commission * 2.0;
-                    }
-                    foreach (var o in openOrders)
-                    {
-                        curPNL += o.pnl;
                     }
                     pnlList[cur] = curPNL;
                 }

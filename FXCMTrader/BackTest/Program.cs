@@ -40,7 +40,7 @@ namespace BackTest
                     double R2 = GoodnessOfFit.RSquared(xdata.Select(x => la + lb * x).ToArray(), ydata.ToArray());
                     if (R2 > 0.7 && r.Item3 > 0)
                     {
-                        Console.WriteLine("{0}, {1}: {2}, {3}", a, b, r.Item3.ToString(), R2.ToString());
+                        Console.WriteLine("{0}, {1}, {2}, {3}", a, b, r.Item3.ToString(), R2.ToString());
                     }
                     if (string.IsNullOrEmpty(row)) row = R2.ToString();
                     else row = row + "," + Math.Round(R2, 2).ToString();

@@ -22,7 +22,7 @@ namespace Chart
         private void GetData(object sender, System.EventArgs e)
         {
             DataRepo.DataRepo dataRepo = new DataRepo.DataRepo();
-            dataRepo.Load(new int[] {2015, 2016, 2017 }, DataRepo.DataRepo.Symbol);
+            dataRepo.Load(new int[] {2014, 2015, 2016, 2017 }, DataRepo.DataRepo.Symbol);
             
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
