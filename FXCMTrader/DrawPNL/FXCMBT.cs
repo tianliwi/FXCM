@@ -14,7 +14,7 @@ namespace DrawPNL
         {
             InitializeComponent();
             
-            Load += new EventHandler(LoadCharts);
+            Load += new EventHandler(LoadBackTest);
         }
 
         private void LoadCharts(object sender, System.EventArgs e)
