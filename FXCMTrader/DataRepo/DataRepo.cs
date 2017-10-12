@@ -34,12 +34,12 @@ namespace DataRepo
             {
                 LoadData(year, symbol, "M1");
                 LoadData(year, symbol, "H4");
-                LoadData(year, symbol, "D1");
+                //LoadData(year, symbol, "D1");
             }
         }
         public void LoadData(int year, string symbol, string granularity)
         {
-            string filename = DataDir + symbol + @"\" + year.ToString() + "_" + granularity + ".csv";
+            string filename = getFileName(year, symbol, granularity);
             switch (granularity)
             {
                 case "M1":
@@ -53,7 +53,11 @@ namespace DataRepo
                     break;
             }
         }
-        public SortedList<DateTime, Candle> LoadCSV(string filename, ref SortedList<DateTime, Candle> list)
+        public string getFileName(int year, string symbol, string granularity)
+        {
+            return DataDir + symbol + @"\" + year.ToString() + "_" + granularity + ".csv";
+        }
+        public void LoadCSV(string filename, ref SortedList<DateTime, Candle> list)
         {
             string[] lines = File.ReadAllLines(filename);
             foreach (var line in lines)
@@ -72,7 +76,6 @@ namespace DataRepo
                 candle.Volume = Convert.ToInt32(col[10]);
                 list[DateTime.ParseExact(col[0],"yyyyMMdd HH:mm:ss", CultureInfo.CurrentCulture)] = candle;
             }
-            return list;
         }
     }
 }

@@ -36,8 +36,8 @@ namespace BackTest
             openOrders.Clear();
             closedOrders.Clear();
 
-            DateTime BTStart = new DateTime(2015, 6, 1);
-            DateTime BTEnd = new DateTime(2016, 9, 1);
+            //DateTime BTStart = new DateTime(2015, 6, 1);
+            //DateTime BTEnd = new DateTime(2016, 9, 1);
             foreach (var h4Bin in data.H4)
             {
                 pendOrders.Clear();

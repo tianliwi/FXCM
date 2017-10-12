@@ -3,3 +3,4 @@ E:\GitHub\FXCM\FXCMTrader\DataRepo\bin\Debug\DataRepo.pdb
 E:\GitHub\FXCM\FXCMTrader\DataRepo\obj\Debug\DataRepo.csproj.CoreCompileInputs.cache
 E:\GitHub\FXCM\FXCMTrader\DataRepo\obj\Debug\DataRepo.dll
 E:\GitHub\FXCM\FXCMTrader\DataRepo\obj\Debug\DataRepo.pdb
+E:\GitHub\FXCM\FXCMTrader\DataRepo\obj\Debug\DataRepo.csprojResolveAssemblyReference.cache

@@ -46,6 +46,9 @@ namespace HistoricalDataDownloader
 
         static void Main(string[] args)
         {
+            M1Process m1Process = new M1Process(2012, "AUD");
+            m1Process.GenerateH4();
+            return;
             try
             {
 
