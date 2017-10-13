@@ -12,7 +12,7 @@ namespace BackTest
         static void Main(string[] args)
         {
             DataRepo.DataRepo data = new DataRepo.DataRepo();
-            data.Load(new int[] { 2016, 2017 } , DataRepo.DataRepo.Symbol);
+            data.Load(new int[] {2012, 2013, 2014, 2015, 2016, 2017 } , DataRepo.DataRepo.Symbol);
 
             LongStrategy longStra = new LongStrategy(data);
 

@@ -30,15 +30,15 @@ namespace DrawPNL
 
         private void LoadBackTest(object sender, System.EventArgs e)
         {
-            double k1 = 0.18;
-            double k2 = 0.28;
+            double k1 = 0.12;// 0.18;
+            double k2 = 0.32;// 0.28;
             DataRepo.DataRepo data = new DataRepo.DataRepo();
             data.Load(new int[] {2012, 2013, 2014, 2015, 2016, 2017 }, DataRepo.DataRepo.Symbol);
             LongStrategy longStra = new LongStrategy(data);
             Tuple<int, int, double> res = longStra.Start(k1, k2, true);
             chart1.Titles.Add("Win: " + res.Item1.ToString() + ", " + 
                 "Loss: " + res.Item2.ToString() + ", " + 
-                "Profit: " + res.Item3.ToString("C", CultureInfo.CurrentCulture) + ", " + longStra.pnlList.Count);
+                "Profit: " + res.Item3.ToString("C", CultureInfo.CurrentCulture));
             var series = chart1.Series.ElementAt(0);
             series.ChartType = SeriesChartType.Line;
             List<int> x = new List<int>();

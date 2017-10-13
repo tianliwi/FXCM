@@ -34,7 +34,7 @@ namespace Chart
             double yMin = 2;
             double yMax = 0;
             int lineNum = 0;
-            foreach (var line in dataRepo.D1)
+            foreach (var line in dataRepo.H4)
             {
                 DataRow row = dt.NewRow();
                 row["ID"] = lineNum++;
@@ -49,12 +49,12 @@ namespace Chart
             }
             chart1.ChartAreas[0].AxisY.Minimum = yMin;
             chart1.ChartAreas[0].AxisY.Maximum = yMax;
-            //chart.ChartAreas[0].AxisX.Interval = 60;
-            //chart.ChartAreas[0].AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-            //chart.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
+            chart1.ChartAreas[0].AxisX.Interval = 60;
+            chart1.ChartAreas[0].AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
             chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             chart1.DataSource = dt;
-            chart1.Series["M1"].XValueMember = "ID";
+            chart1.Series["M1"].XValueMember = "Date";
             chart1.Series["M1"].YValueMembers = "High, Low, Open, Close";
             chart1.Series["M1"].CustomProperties = "PriceDownColor=Red, PriceUpColor=Green";
             chart1.Series["M1"]["ShowOpenClose"] = "Both";

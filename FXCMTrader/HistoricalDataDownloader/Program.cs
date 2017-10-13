@@ -46,9 +46,6 @@ namespace HistoricalDataDownloader
 
         static void Main(string[] args)
         {
-            M1Process m1Process = new M1Process(2012, "AUD");
-            m1Process.GenerateH4();
-            return;
             try
             {
 
@@ -112,6 +109,11 @@ namespace HistoricalDataDownloader
 
                 session.unsubscribeSessionStatus(sessionStatusListener);
                 session.Dispose();
+                if (sTimeframeName.ToUpper() == "M1")
+                {
+                    M1Process m1Process = new M1Process(Convert.ToInt32(sStartTime.Substring(0, 4)), "AUD");
+                    m1Process.GenerateH4();
+                }
                 Console.WriteLine("Press enter to exit");
                 Console.ReadLine();
 

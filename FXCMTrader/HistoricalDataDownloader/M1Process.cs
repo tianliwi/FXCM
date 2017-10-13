@@ -42,12 +42,9 @@ namespace HistoricalDataDownloader
                 Candle curM1Candle = entry.Value;
                 if(curH4Candle.AskOpen < 0)
                 {
-                    //Console.WriteLine(curTime);
                     curH4Candle.AskOpen = curM1Candle.AskOpen;
                     curH4Candle.BidOpen = curM1Candle.BidOpen;
                     curH4Candle.openTime = curM1Candle.openTime.Substring(0,9) + H4Slots[GetH4Slot(curTime)];
-                    //Console.WriteLine(GetH4Slot(curTime));
-                    //Console.WriteLine(curH4Candle.openTime);
                 }
                 curH4Candle.AskHigh = Math.Max(curH4Candle.AskHigh, curM1Candle.AskHigh);
                 curH4Candle.BidHigh = Math.Max(curH4Candle.BidHigh, curM1Candle.BidHigh);
@@ -56,7 +53,6 @@ namespace HistoricalDataDownloader
 
                 if(GetH4Slot(curTime) != GetH4Slot(curTime.AddMinutes(1)))
                 {
-                    //Console.WriteLine(curTime);
                     Candle c = new Candle();
                     c.openTime = curH4Candle.openTime;
                     c.BidOpen = curH4Candle.BidOpen;
